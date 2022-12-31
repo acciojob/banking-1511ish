@@ -17,7 +17,8 @@ public class BankAccount {
 
     public BankAccount(String name, double balance, double minBalance) {
         this.minBalance=minBalance;
-        deposit(balance);
+        //deposit(balance);
+        this.balance = balance;
         this.name=name;
     }
 
