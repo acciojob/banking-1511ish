@@ -1,15 +1,12 @@
 package com.driver;
-
 class ValidLicense extends Exception{
     ValidLicense(){
         super("Valid License can not be generated");
     }
 }
-public class CurrentAccount extends BankAccount{
-    String tradeLicenseId; //consists of Uppercase English characters only
-
+public class CurrentAccount extends BankAccount {
+    String tradeLicenseId;
     public CurrentAccount(String name, double balance, String tradeLicenseId) throws Exception {
-        // minimum balance is 5000 by default. If balance is less than 5000, throw "Insufficient Balance" exception
         super(name, balance, 5000);
         if(balance<5000){
             throw new Insufficient();
@@ -35,7 +32,6 @@ public class CurrentAccount extends BankAccount{
         }
         return ch;
     }
-
     public String rearrangeString(String S) {
         int N = S.length();
         if (N == 0)
@@ -75,12 +71,7 @@ public class CurrentAccount extends BankAccount{
         }
         return res;
     }
-
     public void validateLicenseId() throws Exception {
-        // A trade license Id is said to be valid if no two consecutive characters are same
-        // If the license Id is valid, do nothing
-        // If the characters of the license Id can be rearranged to create any valid license Id
-        // If it is not possible, throw "Valid License can not be generated" Exception
         if(!consecutive()) {
             this.tradeLicenseId  = rearrangeString(this.tradeLicenseId.toLowerCase()).toUpperCase();
             if(this.tradeLicenseId==null || this.tradeLicenseId.length()==0){
@@ -92,5 +83,4 @@ public class CurrentAccount extends BankAccount{
     public String getTradeLicenseId() {
         return tradeLicenseId;
     }
-
 }

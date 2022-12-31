@@ -1,5 +1,4 @@
 package com.driver;
-
 class Insufficient extends Exception{
     Insufficient(){
         super("Insufficient Balance");
@@ -22,7 +21,6 @@ public class BankAccount {
         this.name=name;
     }
 
-    //myself
     private String AccountNumber;
     public void getNumber(int n, int sum, char out[],
                           int index)
@@ -49,16 +47,16 @@ public class BankAccount {
             getNumber(n, sum - i, out, index + 1);
         }
     }
-
     public String generateAccountNumber(int digits, int sum) throws Exception{
         //Each digit of an account number can lie between 0 and 9 (both inclusive)
         //Generate account number having given number of 'digits' such that the sum of digits is equal to 'sum'
         //If it is not possible, throw "Account Number can not be generated" exception
+
         if(sum<0 || 9*digits<sum){
             throw new Invalid();
         }
         else{
-            char [] out = new char[digits];
+            char [] out = new char[digits+1];
             for(int i=1;i<=9;i++){
                 out [0] = (char)(i+'0');
                 getNumber(digits,sum-i,out,1);
@@ -66,21 +64,20 @@ public class BankAccount {
             return this.AccountNumber;
 
         }
-        //return null;
     }
 
     public void deposit(double amount) {
         //add amount to balance
-       this.balance += amount;
+        this.balance += amount;
     }
 
     public void withdraw(double amount) throws Exception {
-        // Remember to throw "Insufficient Balance" exception, if the remaining amount would be less than minimum balance
-        this.balance -= amount;
+        this.balance-=amount;
         if(this.balance<this.minBalance){
             throw new Insufficient();
         }
     }
+
     public double getBalance() {
         return balance;
     }
@@ -96,6 +93,4 @@ public class BankAccount {
     public String getAccountNumber() {
         return AccountNumber;
     }
-
-
 }
